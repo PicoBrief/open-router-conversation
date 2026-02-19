@@ -1,7 +1,7 @@
 {
   "name": "@pico-brief/open-router-conversation",
   "version": "1.0.0",
-  "description": "A powerful TypeScript/JavaScript client for OpenRouter — the universal API gateway that gives you access to dozens of AI models through a single interface.",
+  "description": "A TypeScript OpenRouter client built around parallel retries — instead of waiting for a slow or failed request to time out before trying again, it fires off concurrent attempts and returns whichever finishes first. You can validate each response before accepting it, automatically rotating models across attempts.",
   "type": "module",
   "main": "./dist/OpenRouterConversation.js",
   "types": "./dist/OpenRouterConversation.d.ts",
