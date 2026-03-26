@@ -425,7 +425,15 @@ async function executeRequest(
     signal: AbortSignal
 ): Promise<RawResponse> {
     const startTime = Date.now();
-    const res = await fetch(url, { method: "POST", headers, body, signal });
+    // Combine the caller's abort signal with a 3-minute hard timeout to prevent
+    // indefinitely hanging requests. The race-promise system handles soft timeouts
+    // (expectedRunTime); this is a safety net for truly stuck connections.
+    const HARD_TIMEOUT_MS = 3 * 60 * 1000;
+    const timeoutSignal = AbortSignal.timeout(HARD_TIMEOUT_MS);
+    const combinedSignal = signal
+        ? AbortSignal.any([signal, timeoutSignal])
+        : timeoutSignal;
+    const res = await fetch(url, { method: "POST", headers, body, signal: combinedSignal });
 
     if (!res.ok) {
         const errBody = await res.json().catch(() => ({})) as Record<string, unknown>;
