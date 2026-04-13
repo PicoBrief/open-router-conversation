@@ -154,6 +154,8 @@ export type APIParams = ModelSelection & {
     session_id?: string;
     user?: string;
     metadata?: Record<string, string>;
+    /** OpenAI service tier. Controls cost/latency tradeoffs (OpenAI models only). */
+    service_tier?: "auto" | "default" | "flex" | "priority";
 };
 
 /**
@@ -811,6 +813,7 @@ function buildRequestBody(
             session_id:         params.session_id,
             user:               params.user,
             metadata:           params.metadata,
+            service_tier:       params.service_tier,
         })
     );
 }

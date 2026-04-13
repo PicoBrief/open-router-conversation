@@ -1,6 +1,6 @@
 {
   "name": "@pico-brief/open-router-conversation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A TypeScript OpenRouter client built around parallel retries — instead of waiting for a slow or failed request to time out before trying again, it fires off concurrent attempts and returns whichever finishes first. You can validate each response before accepting it, automatically rotating models across attempts.",
   "type": "module",
   "main": "./dist/OpenRouterConversation.js",
